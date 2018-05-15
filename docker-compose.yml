@@ -2,6 +2,7 @@ version: '3'
 services:
   mysql:
     image: mysql:5.7
+    container_name: "mysql"
     environment:
       - MYSQL_ROOT_PASSWORD=dev
       - MYSQL_DATABASE=dev
@@ -11,18 +12,15 @@ services:
       - ./db/var/lib/mysql:/var/lib/mysql
       - ./db/var/backups:/var/backups
     ports:
-      - "3306:3306"
+      - "3306:3306"  
   php-apache:
-    environment:
-      - COMPOSER_ALLOW_SUPERUSER=1
     build: ./php-apache
-    container_name: "ljacontrucoes-php"
+    container_name: "php"
     volumes:
       - ./www/:/var/www/
       - ./php-apache/php/conf/error.ini:/usr/local/etc/php/conf.d/error.ini
       - ./php-apache/php/log/:/var/log/php/
       - ./php-apache/apache/log/:/var/log/apache2/
-      
     ports:
       - "80:80"
       - "443:443"
