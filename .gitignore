@@ -1,0 +1,3 @@
+!.keep
+*.log
+db/var/lib/mysql
